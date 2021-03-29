@@ -7,7 +7,7 @@
 {% block content %}
     <ul class="list-group mt-5">
         {% for video in video_list %}
-            <li class="list-group-item">
+            <li class="list-group-item" style="background: #212529">
                 {% if video.name %}
                     <a href="{% url 'detail-video' video.pk %}">{{ video.name }}</a>
                 {% else %}
@@ -17,5 +17,4 @@
             </li>
         {% endfor %}
     </ul>
-
 {% endblock %}

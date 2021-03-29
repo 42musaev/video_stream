@@ -1,14 +1,12 @@
-import mimetypes
 import os
+import mimetypes
 from wsgiref.util import FileWrapper
 
-from django.conf.urls import url
 from django.http import StreamingHttpResponse, FileResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView
-from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from vstream.forms import VideoForm
@@ -56,7 +54,6 @@ def stream_video(request, video_id):
         resp = StreamingHttpResponse(FileWrapper(open(video.video.path, 'rb')), content_type=content_type)
         resp['Content-Length'] = str(size)
     resp['Accept-Ranges'] = 'bytes'
-    print(content_type, '==========================')
     return resp
 
 

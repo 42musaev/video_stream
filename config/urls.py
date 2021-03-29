@@ -18,7 +18,10 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from config.views import base
+
 urlpatterns = [
+    path('', base, name='base'),
     path('admin/', admin.site.urls),
     path('vstream/', include('vstream.urls'))
 ]
