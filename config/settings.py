@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'vstream',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

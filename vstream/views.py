@@ -2,10 +2,14 @@ import mimetypes
 import os
 from wsgiref.util import FileWrapper
 
+from django.conf.urls import url
 from django.http import StreamingHttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from vstream.forms import VideoForm
 from vstream.models import Video
@@ -20,8 +24,8 @@ class Index(View):
     def post(self, request):
         form = VideoForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return render(request, 'vstream/index.html')
+            obj = form.save()
+            return redirect(reverse('detail-video', kwargs={'video_id': obj.pk}))
         return render(request, 'vstream/index.html', {'form': form})
 
 
@@ -58,3 +62,8 @@ def stream_video(request, video_id):
 class DetailVideo(View):
     def get(self, request, video_id):
         return render(request, 'vstream/detail-video.html', {'video_id': video_id})
+
+
+class DetailVideoApi(APIView):
+    def get(self, request, video_id):
+        return Response(stream_video(request, video_id))
