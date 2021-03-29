@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    List Video — {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <ul class="list-group mt-5">
+        {% for video in video_list %}
+            <li class="list-group-item">
+                {% if video.name %}
+                    {{ video.name }}
+                {% else %}
+                    {{ video.video.name }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

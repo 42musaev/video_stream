@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Detail Video — {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+<video class="mt-5" width="650" height="650" controls><source src="{% url 'detail-video-stream' video_id %}"></video>
+{% endblock %}
