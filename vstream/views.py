@@ -4,7 +4,7 @@ from wsgiref.util import FileWrapper
 
 from django.conf.urls import url
 from django.http import StreamingHttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView
@@ -66,4 +66,4 @@ class DetailVideo(View):
 
 class DetailVideoApi(APIView):
     def get(self, request, video_id):
-        return Response(stream_video(request, video_id))
+        return stream_video(request, video_id)
