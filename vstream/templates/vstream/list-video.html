@@ -9,9 +9,10 @@
         {% for video in video_list %}
             <li class="list-group-item">
                 {% if video.name %}
-                    {{ video.name }}
+                    <a href="{% url 'detail-video' video.pk %}">{{ video.name }}</a>
                 {% else %}
-                    {{ video.video.name }}
+                    <a href="{% url 'detail-video' video.pk %}">{{ video.video.name }}</a>
+
                 {% endif %}
             </li>
         {% endfor %}
