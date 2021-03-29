@@ -3,7 +3,7 @@ import os
 from wsgiref.util import FileWrapper
 
 from django.conf.urls import url
-from django.http import StreamingHttpResponse
+from django.http import StreamingHttpResponse, FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import View
@@ -56,6 +56,7 @@ def stream_video(request, video_id):
         resp = StreamingHttpResponse(FileWrapper(open(video.video.path, 'rb')), content_type=content_type)
         resp['Content-Length'] = str(size)
     resp['Accept-Ranges'] = 'bytes'
+    print(content_type, '==========================')
     return resp
 
 
@@ -66,4 +67,5 @@ class DetailVideo(View):
 
 class DetailVideoApi(APIView):
     def get(self, request, video_id):
-        return stream_video(request, video_id)
+        short_report = open(Video.objects.get(pk=video_id).video.path, 'rb')
+        return FileResponse(FileWrapper(short_report), content_type='video/webm', status=200)
