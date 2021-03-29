@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Index — {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div class="card gy-5">
+        <h5 class="card-header">Download video</h5>
+        <div class="card-body">
+            <form action="">
+                <div class="form-group">
+                    <label>Video</label>
+                    <input type="file" class="form-control">
+                </div>
+                <br>
+                <button type="button" class="btn btn-success">Upload</button>
+
+            </form>
+
+        </div>
+    </div>
+{% endblock %}
